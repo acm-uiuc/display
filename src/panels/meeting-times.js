@@ -1,9 +1,10 @@
 var React = require('react');
 var $ = require('jquery');
 var classNames = require('classnames');
+var time = require('../utils/time.js');
 
 var secrets = require('../secrets.js');
-var groupsURL = secrets.grootServicesURL + '/groups/sigs/'
+var groupsURL = secrets.grootServicesURL + ':9001/groups/sigs/'
 
 var ROWS_PER_PAGE = 9;
 var REFRESH_TIMES_MS = 60 * 1000;
@@ -43,12 +44,13 @@ var MeetingTimesPanel = React.createClass({
         var pageTimes = this.state.sigs.slice(index, index + ROWS_PER_PAGE);
         var items = pageTimes.map(function(meeting) {
             var location = meeting.meetingLoc ? meeting.meetingLoc : 'TBA';
-            var time = (meeting.meetingDay && meeting.meetingTime) ?
-                       (meeting.meetingDay + ' ' + meeting.meetingTime) : 'TBA';
+            var meeting_time = time.formatMeetingTime(meeting.meetingTime);
+            var fulltime = (meeting.meetingDay && meeting_time) ?
+                           (meeting.meetingDay + ' ' + meeting_time) : 'TBA';
             return <tr key={meeting.name}>
                 <td>{meeting.name}</td>
                 <td>{location}</td>
-                <td>{time}</td>
+                <td>{fulltime}</td>
             </tr>;
         });
 
