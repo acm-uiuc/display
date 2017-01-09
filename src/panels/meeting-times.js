@@ -4,7 +4,7 @@ var classNames = require('classnames');
 var time = require('../utils/time.js');
 
 var secrets = require('../secrets.js');
-var groupsURL = secrets.grootServicesURL + '/groups/sigs/'
+var groupsURL = secrets.grootServicesURL + '/groups/sigs'
 
 var ROWS_PER_PAGE = 9;
 var REFRESH_TIMES_MS = 60 * 1000;
@@ -22,7 +22,7 @@ var MeetingTimesPanel = React.createClass({
     },
 
     updateMeetingTimes: function() {
-        $.get(groupsURL, function(data) {
+        $.getJSON(groupsURL, function(data) {
             this.setState({sigs: data})
         }.bind(this));
     },

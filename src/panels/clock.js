@@ -9,12 +9,12 @@ var time = require('../utils/time');
 var ClockPanel = React.createClass({
     getInitialState: function() {
         return {
-            date: new Date()
+            date: moment()
         };
     },
 
     tick: function() {
-        this.setState({date: new Date()});
+        this.setState({date: moment()});
     },
 
     componentDidMount: function() {
@@ -24,10 +24,10 @@ var ClockPanel = React.createClass({
     render: function() {
         return <div className="clock-panel">
             <div className="clock-time">
-                {time.formatTime(this.state.date)}
+                {this.state.date.format('h:mm A')}
             </div>
             <div className="clock-date">
-                {moment(this.state.date).format('dddd, MMMM D, YYYY')}
+                {this.state.date.format('dddd, MMMM D, YYYY')}
             </div>
         </div>;
     }
