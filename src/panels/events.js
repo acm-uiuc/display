@@ -1,14 +1,13 @@
 var React = require('react');
 var $ = require('jquery');
-var ICAL = require('ical.js');
 var moment = require('moment');
 var classNames = require('classnames');
+var secrets = require('../secrets.js');
 
 var time = require('../utils/time');
 
-var icalUrl = 'https://www-s.acm.illinois.edu/calendar/feed.ics';
+var eventsURL = secrets.grootServicesURL + '/events'
 var EVENTS_INTERVAL_MS = 60 * 1000;
-var ONE_DAY = new ICAL.Duration({days: 1});
 
 /**
  * Events panel.
@@ -20,21 +19,31 @@ var EventsPanel = React.createClass({
         };
     },
 
-    updateEvents: function() {
-        $.get(icalUrl, function(data) {
-            var comp = new ICAL.Component(ICAL.parse(data));
-            var now = ICAL.Time.now();
-            var events = comp.getAllSubcomponents('vevent')
-                .map(function(vevent) {
-                    return new ICAL.Event(vevent);
+    updateEvents: function() {  
+        $.get(eventsURL, function(data) {
+            var now = moment();
+            console.log(data)
+            var events = data
+                .map(function(e) {
+                    var start = moment(e.start_time);
+                    var end = moment(e.end_time)
+                    return {
+                        startDate: start,
+                        endDate: end,
+                        duration: moment.duration(end.diff(start)),
+                        name: e.name,
+                        id: e.id,
+                        location: e.place ? e.place.name : null
+                    }
                 })
-                .filter(function(vevent) {
-                    return vevent.endDate.compare(now) >= 1;
+                .filter(function(e) {
+                    return e.startDate.isAfter(now);
                 })
                 .sort(function(a, b) {
-                    return a.startDate.compare(b.startDate);
+                    return a.startDate.isAfter(b.startDate);
                 })
                 .slice(0, 5);
+            console.log(events)
             this.setState({events: events});
         }.bind(this));
     },
@@ -45,32 +54,19 @@ var EventsPanel = React.createClass({
     },
 
     formatDate: function(date, isEndDate, showDate) {
-        var jsDate = date.toJSDate();
-        if (isEndDate && date.isDate) {
-            jsDate.setDate(jsDate.getDate() - 1);
-        }
         var dateComponents = [];
         if (showDate) {
-            dateComponents.push(moment(jsDate).format('MMM D'));
+            dateComponents.push(date.format('MMM D'));
         }
-        if (!date.isDate) {
-            dateComponents.push(time.formatTime(jsDate));
-        }
+        dateComponents.push(date.format('h:mm A'));
         return dateComponents.join(' ');
-    },
-
-    isSingleDay: function(event) {
-        return event.startDate.isDate && event.duration.compare(ONE_DAY) === 0;
     },
 
     formatEventTime: function(event) {
         var startDateStr = this.formatDate(event.startDate, false, true);
-        if (this.isSingleDay(event)) {
-            return startDateStr;
-        }
-        var isSameDay = event.startDate.compareDateOnlyTz(
-            event.endDate, ICAL.Timezone.localTimezone);
-        var endDateStr = this.formatDate(event.endDate, true, isSameDay);
+        var isSameDay = event.startDate.isSame(event.endDate, 'day');
+        console.log(isSameDay)
+        var endDateStr = this.formatDate(event.endDate, true, !isSameDay);
         return startDateStr +  ' \u2013 ' + endDateStr;
     },
 
@@ -80,10 +76,11 @@ var EventsPanel = React.createClass({
             return <p>No upcoming events</p>;
         }
         return events.map(function(event) {
-            return <div key={event.uid} className="event-item">
-                <div className="event-summary">{event.summary}</div>
+            var loc = event.location ? <div className="event-location">{event.location}</div> : '';
+            return <div key={event.id} className="event-item">
+                <div className="event-summary">{event.name}</div>
                 <div>{this.formatEventTime(event)}</div>
-                <div>{event.location}</div>
+                {loc}
             </div>;
         }.bind(this));
     },

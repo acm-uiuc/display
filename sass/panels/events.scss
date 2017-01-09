@@ -9,6 +9,12 @@
     .event-summary {
         font-size: 1.25em;
     }
+
+    .event-location {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 .events-body-no-events {
