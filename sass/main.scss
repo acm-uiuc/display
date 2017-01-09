@@ -9,6 +9,8 @@
 @import 'panels/sponsors';
 @import 'panels/sujay';
 @import 'panels/weather';
+@import url('../node_modules/react-grid-layout/css/styles.css');
+
 
 body {
     color: $font-color;
@@ -40,10 +42,11 @@ body {
 }
 
 .panel {
-    margin-left: 25px;
     border: 1px solid $border-color;
     display: flex;
     flex-direction: column;
+    width: inherit;
+    height: inherit;
 
     .panel-heading {
         padding: 10px;

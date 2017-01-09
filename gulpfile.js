@@ -3,6 +3,7 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var sass = require('gulp-sass');
+var importCss = require('gulp-import-css');
 
 gulp.task('bundle', function() {
     return browserify('./src/main.js')
@@ -15,6 +16,7 @@ gulp.task('bundle', function() {
 gulp.task('sass', function() {
     return gulp.src('./sass/main.scss')
     .pipe(sass().on('error', sass.logError))
+    .pipe(importCss())
     .pipe(gulp.dest('.'));
 });
 

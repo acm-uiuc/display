@@ -6,7 +6,7 @@ var time = require('../utils/time.js');
 var secrets = require('../secrets.js');
 var groupsURL = secrets.grootServicesURL + '/groups/sigs'
 
-var ROWS_PER_PAGE = 9;
+var ROWS_PER_PAGE = 8;
 var REFRESH_TIMES_MS = 60 * 1000;
 var SWITCH_PAGE_MS = 10 * 1000;
 
