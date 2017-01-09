@@ -1,9 +1,13 @@
 var React = require('react');
+var $ = require('jquery');
 var classNames = require('classnames');
 
-var meetingTimes = require('../data/meeting-times.json');
+var secrets = require('../secrets.js');
+var groupsURL = secrets.grootServicesURL + '/groups/sigs/'
 
 var ROWS_PER_PAGE = 9;
+var REFRESH_TIMES_MS = 60 * 1000;
+var SWITCH_PAGE_MS = 10 * 1000;
 
 /**
  * Meeting times panel.
@@ -11,26 +15,36 @@ var ROWS_PER_PAGE = 9;
 var MeetingTimesPanel = React.createClass({
     getInitialState: function() {
         return {
-            index: 0
+            index: 0,
+            sigs: []
         };
+    },
+
+    updateMeetingTimes: function() {
+        $.get(groupsURL, function(data) {
+            this.setState({sigs: data})
+        }.bind(this));
     },
 
     nextPage: function() {
         var newIndex = this.state.index + ROWS_PER_PAGE;
-        newIndex = newIndex >= meetingTimes.length ? 0 : newIndex;
+        newIndex = newIndex >= this.state.sigs.length ? 0 : newIndex;
         this.setState({index: newIndex});
     },
 
     componentDidMount: function() {
-        setInterval(this.nextPage, 10000);
+        this.updateMeetingTimes();
+        setInterval(this.updateMeetingTimes, REFRESH_TIMES_MS);
+        setInterval(this.nextPage, SWITCH_PAGE_MS);
     },
 
     render: function() {
         var index = this.state.index;
-        var pageTimes = meetingTimes.slice(index, index + ROWS_PER_PAGE);
+        var pageTimes = this.state.sigs.slice(index, index + ROWS_PER_PAGE);
         var items = pageTimes.map(function(meeting) {
-            var location = meeting.location ? meeting.location : 'TBA';
-            var time = meeting.time ? meeting.time : 'TBA';
+            var location = meeting.meetingLoc ? meeting.meetingLoc : 'TBA';
+            var time = (meeting.meetingDay && meeting.meetingTime) ?
+                       (meeting.meetingDay + ' ' + meeting.meetingTime) : 'TBA';
             return <tr key={meeting.name}>
                 <td>{meeting.name}</td>
                 <td>{location}</td>
@@ -39,7 +53,7 @@ var MeetingTimesPanel = React.createClass({
         });
 
         var dots = [];
-        for (var i = 0; i < meetingTimes.length; i += ROWS_PER_PAGE) {
+        for (var i = 0; i < this.state.sigs.length; i += ROWS_PER_PAGE) {
             var dotClass = classNames({
                 dot: true,
                 active: i == index
