@@ -1,0 +1,13 @@
+$font-color: #333333;
+$font-color-alt: #999;
+$font-color-neg: white;
+$font-color-neg-back: #333333;
+$border-color: #464646;
+
+@mixin monospace-font() {
+    font-family: "Roboto Mono", monospace;
+}
+
+@mixin serif-font() {
+    font-family: 'Open Sans', sans-serif;
+}

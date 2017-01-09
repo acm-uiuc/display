@@ -7,7 +7,7 @@ var Header = React.createClass({
     render: function() {
         return <div className="header-container">
             <div className="header-left">
-                <img src="img/acm-logo.png"
+                <img src="img/acm-logo-flat.svg"
                     className="header-logo" />
                 <div className="header-text">
                     <h1>Association for Computing Machinery</h1>

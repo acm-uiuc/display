@@ -1,3 +1,4 @@
+@import 'base';
 @import 'header';
 @import 'loading';
 @import 'panels/ads';
@@ -10,8 +11,9 @@
 @import 'panels/weather';
 
 body {
+    color: $font-color;
     margin: 0px;
-    font-family: sans-serif;
+    @include monospace-font();
 }
 
 #main {
@@ -39,26 +41,29 @@ body {
 
 .panel {
     margin-left: 25px;
-    border: 1px solid #385461;
+    border: 1px solid $border-color;
     display: flex;
     flex-direction: column;
 
     .panel-heading {
         padding: 10px;
-        background: linear-gradient(#2f86ae, #385461);
-        color: white;
+        border-bottom: 1.5px solid $border-color;
+        color: $font-color-neg;
+        background-color: $font-color-neg-back;
         flex-shrink: 0;
 
         h2 {
             margin-top: 0;
             margin-bottom: 0;
             font-size: 1.25em;
+            font-weight: 400;
         }
     }
 
     .panel-body {
         padding: 10px;
         flex-grow: 1;
+        @include serif-font;
     }
 }
 
