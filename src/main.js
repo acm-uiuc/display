@@ -13,27 +13,33 @@ var argv = remote.process.argv;
 var ReactGridLayout = require('react-grid-layout');
 var WidthProvider = require('react-grid-layout').WidthProvider;
 ReactGridLayout = WidthProvider(ReactGridLayout);
-var dashboard = require('./dashboard');
+var panels = require('./panels');
+var layout = require('./layout.json');
 
 /**
  * Top-level dashboard component.
  */
 var ACMDisplay = React.createClass({
-    onLayoutChange: function(layout, layouts) {
-        ipcRenderer.send('layout-changed', layout);
+    onLayoutChange: function(current_layout, layouts) {
+        ipcRenderer.send('layout-changed', current_layout);
     },
     render: function() {
-        var layout_mode = argv.includes('--layout')
-        var widget_divs = dashboard.widgets.map(function(widget) {
-            return <div key={widget.name}>{React.createElement(widget.component, null)}</div>
+        var layout_mode = argv.includes('--layout');
+        var used_panel_ids = layout.map(function(panel_layout) {
+            return panel_layout.i;
+        });
+        var panel_divs = panels.filter(function(panel) {
+            return used_panel_ids.includes(panel.name);
+        }).map(function(panel) {
+            return <div key={panel.name}>{React.createElement(panel.component, null)}</div>
         });
         return <div>
             <Header />
-            <ReactGridLayout className="layout" layout={dashboard.layout} cols={24}
+            <ReactGridLayout className="layout" layout={layout} cols={24}
                     rowHeight={30} width={1920} autoSize={false} margin={[15, 15]}
                     isResizable={layout_mode} isDraggable={layout_mode}
                     onLayoutChange={this.onLayoutChange}>
-                {widget_divs}
+                {panel_divs}
             </ReactGridLayout>
         </div>;
     }

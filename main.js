@@ -33,7 +33,7 @@ function createWindow () {
     // Save current layout for layout mode
     ipcMain.on('layout-changed', function(event, layout) {
         if(process.argv.includes('--layout')) {
-            fs.writeFile('./latestLayout.json',
+            fs.writeFile('./current_layout.json',
                 JSON.stringify(layout.map(function(widget) {
                     return {
                         i: widget.i,
