@@ -14,10 +14,8 @@ var dashboard = require('./dashboard');
 var ACMDisplay = React.createClass({
     render: function() {
         var widget_divs = dashboard.widgets.map(function(widget) {
-            console.log(widget)
             return <div key={widget.name}>{React.createElement(widget.component, null)}</div>
         });
-        console.log(widget_divs)
         return <div>
             <Header />
             <ReactGridLayout className="layout" layout={dashboard.layout} cols={24}

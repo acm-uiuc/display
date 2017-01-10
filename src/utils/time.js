@@ -8,3 +8,11 @@ exports.formatMeetingTime = function(date) {
     }
     return date.minute() === 0 ? date.format('h A') : date.format('h:mm A');
 }
+
+exports.formatMeetingDate = function(date) {
+    date = moment(date, 'dddd', true);
+    if(!date.isValid()){
+        return undefined;
+    }
+    return date.format('ddd')
+}
