@@ -73,7 +73,7 @@ var EventsPanel = React.createClass({
             return <p>No upcoming events</p>;
         }
         return events.map(function(event) {
-            var loc = event.location ? <div className="event-location">{event.location}</div> : '';
+            var loc = event.location ? <div className="event-location">{event.location}</div> : null;
             return <div key={event.id} className="event-item">
                 <div className="event-summary">{event.name}</div>
                 <div>{this.formatEventTime(event)}</div>
@@ -88,7 +88,7 @@ var EventsPanel = React.createClass({
             'events-body-no-events': this.state.events.length == 0
         });
 
-        return <div className="panel events-panel">
+        return <div className="panel">
             <div className="panel-heading">
                 <h2>Events</h2>
             </div>

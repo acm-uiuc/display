@@ -66,7 +66,7 @@ var MeetingTimesPanel = React.createClass({
             dots.push(<span key={i} className={dotClass} />);
         }
 
-        return <div className="panel meeting-times-panel">
+        return <div className="panel">
             <div className="panel-heading">
                 <h2>Meeting Times</h2>
             </div>

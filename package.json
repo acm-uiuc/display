@@ -16,7 +16,7 @@
         "babelify": "7.2.x",
         "browserify": "13.0.x",
         "classnames": "2.2.x",
-        "electron": "^1.4.13",
+        "electron": "^1.4.x",
         "gulp": "3.9.x",
         "gulp-import-css": "0.1.x",
         "gulp-sass": "2.3.x",
