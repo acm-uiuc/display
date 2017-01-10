@@ -24,12 +24,12 @@ var ACMDisplay = React.createClass({
         ipcRenderer.send('layout-changed', current_layout);
     },
     render: function() {
-        var layout_mode = argv.includes('--layout');
-        var used_panel_ids = layout.map(function(panel_layout) {
-            return panel_layout.i;
+        var inLayoutMode = argv.includes('--layout');
+        var usedPanelIds = layout.map(function(panelLayout) {
+            return panelLayout.i;
         });
-        var panel_divs = panels.filter(function(panel) {
-            return used_panel_ids.includes(panel.name);
+        var panelDivs = panels.filter(function(panel) {
+            return usedPanelIds.includes(panel.name);
         }).map(function(panel) {
             return <div key={panel.name}>{React.createElement(panel.component, null)}</div>
         });
@@ -37,7 +37,7 @@ var ACMDisplay = React.createClass({
             <Header />
             <ReactGridLayout className="layout" layout={layout} cols={24}
                     rowHeight={30} width={1920} autoSize={false} margin={[15, 15]}
-                    isResizable={layout_mode} isDraggable={layout_mode}
+                    isResizable={inLayoutMode} isDraggable={inLayoutMode}
                     onLayoutChange={this.onLayoutChange}>
                 {panel_divs}
             </ReactGridLayout>

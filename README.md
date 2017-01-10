@@ -31,7 +31,7 @@ A panel is just a React component that can be fit flexibly inside a `div` (to co
 To add a new type of panel:
 
 1. Create a new panel component in `src/panels/`.
-2. Import your panel component in `src/panels.js` and give it a representitive name.
+2. Import your panel component in `src/panels.js` and give it a representative name.
 3. Add an entry in `src/layout.json` to render your panel on the dashboard.
 4. Follow the instructions for 'Changing the layout' to graphically resize and position your panel.
 
