@@ -1,6 +1,8 @@
 'use strict';
 
 const electron = require('electron');
+const fs = require('fs');
+const ipcMain = electron.ipcMain;
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -27,6 +29,22 @@ function createWindow () {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null;
+    });
+    // Save current layout for layout mode
+    ipcMain.on('layout-changed', function(event, layout) {
+        if(process.argv.includes('--layout')) {
+            fs.writeFile('./latestLayout.json',
+                JSON.stringify(layout.map(function(widget) {
+                    return {
+                        i: widget.i,
+                        x: widget.x,
+                        y: widget.y,
+                        w: widget.w,
+                        h: widget.h
+                    }
+                }), undefined, 4)
+            );
+        }
     });
 }
 

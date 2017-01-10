@@ -16,14 +16,16 @@
         "babelify": "7.2.x",
         "browserify": "13.0.x",
         "classnames": "2.2.x",
+        "electron": "^1.4.13",
         "gulp": "3.9.x",
+        "gulp-import-css": "0.1.x",
         "gulp-sass": "2.3.x",
         "ical.js": "1.2.x",
         "jquery": "2.2.x",
         "moment": "2.12.x",
         "react": "0.14.x",
-        "react-grid-layout": "0.13.x",
         "react-dom": "0.14.x",
+        "react-grid-layout": "0.13.x",
         "vinyl-source-stream": "1.1.x"
     }
 }
