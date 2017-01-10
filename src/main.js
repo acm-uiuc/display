@@ -20,8 +20,8 @@ var layout = require('./layout.json');
  * Top-level dashboard component.
  */
 var ACMDisplay = React.createClass({
-    onLayoutChange: function(current_layout, layouts) {
-        ipcRenderer.send('layout-changed', current_layout);
+    onLayoutChange: function(currentLayout, layouts) {
+        ipcRenderer.send('layout-changed', currentLayout);
     },
     render: function() {
         var inLayoutMode = argv.includes('--layout');
@@ -39,7 +39,7 @@ var ACMDisplay = React.createClass({
                     rowHeight={30} width={1920} autoSize={false} margin={[15, 15]}
                     isResizable={inLayoutMode} isDraggable={inLayoutMode}
                     onLayoutChange={this.onLayoutChange}>
-                {panel_divs}
+                {panelDivs}
             </ReactGridLayout>
         </div>;
     }

@@ -2,10 +2,10 @@ var React = require('react');
 var $ = require('jquery');
 var classNames = require('classnames');
 var time = require('../utils/time.js');
-var moment = require('moment')
+var moment = require('moment');
 
 var secrets = require('../secrets.js');
-var groupsURL = secrets.grootServicesURL + '/groups/sigs'
+var groupsURL = secrets.grootServicesURL + '/groups/sigs';
 
 var ROWS_PER_PAGE = 9;
 var REFRESH_TIMES_MS = 60 * 1000;
@@ -24,7 +24,7 @@ var MeetingTimesPanel = React.createClass({
 
     updateMeetingTimes: function() {
         $.getJSON(groupsURL, function(data) {
-            this.setState({sigs: data})
+            this.setState({sigs: data});
         }.bind(this));
     },
 
@@ -45,7 +45,7 @@ var MeetingTimesPanel = React.createClass({
         var pageTimes = this.state.sigs.slice(index, index + ROWS_PER_PAGE);
         var items = pageTimes.map(function(meeting) {
             var location = meeting.meetingLoc ? meeting.meetingLoc : 'TBA';
-            var meeting_time = moment(meeting.meetingTime, 'h:mm A', true)
+            var meeting_time = moment(meeting.meetingTime, 'h:mm A', true);
             meeting_time = meeting_time.isValid() ? time.formatTime(meeting_time, true) : undefined;
             var meeting_date = time.formatMeetingDate(meeting.meetingDay) || meeting.meetingDay;
             var fulltime = (meeting_date && meeting_time) ?

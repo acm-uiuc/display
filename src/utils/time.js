@@ -22,5 +22,5 @@ exports.formatMeetingDate = function(date) {
     if(!date.isValid()){
         return undefined;
     }
-    return date.format('ddd')
+    return date.format('ddd');
 }

@@ -33,17 +33,16 @@ function createWindow () {
     // Save current layout for layout mode
     ipcMain.on('layout-changed', function(event, layout) {
         if(process.argv.includes('--layout')) {
-            fs.writeFile('./current_layout.json',
-                JSON.stringify(layout.map(function(widget) {
-                    return {
-                        i: widget.i,
-                        x: widget.x,
-                        y: widget.y,
-                        w: widget.w,
-                        h: widget.h
-                    }
-                }), undefined, 4)
-            );
+            var layoutJSON = JSON.stringify(layout.map(function(widget) {
+                return {
+                    i: widget.i,
+                    x: widget.x,
+                    y: widget.y,
+                    w: widget.w,
+                    h: widget.h
+                }
+            }), undefined, 4);
+            fs.writeFile('./current_layout.json', layoutJSON);
         }
     });
 }

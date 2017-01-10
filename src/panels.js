@@ -32,4 +32,4 @@ module.exports = [
         name: 'sponsors',
         component: SponsorsPanel
     }
-]
+];

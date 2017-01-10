@@ -6,7 +6,7 @@ var secrets = require('../secrets.js');
 
 var time = require('../utils/time');
 
-var eventsURL = secrets.grootServicesURL + '/events'
+var eventsURL = secrets.grootServicesURL + '/events';
 var EVENTS_INTERVAL_MS = 60 * 1000;
 
 /**
