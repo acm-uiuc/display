@@ -2,6 +2,7 @@ var React = require('react');
 var $ = require('jquery');
 var classNames = require('classnames');
 var time = require('../utils/time.js');
+var moment = require('moment')
 
 var secrets = require('../secrets.js');
 var groupsURL = secrets.grootServicesURL + '/groups/sigs'
@@ -44,7 +45,8 @@ var MeetingTimesPanel = React.createClass({
         var pageTimes = this.state.sigs.slice(index, index + ROWS_PER_PAGE);
         var items = pageTimes.map(function(meeting) {
             var location = meeting.meetingLoc ? meeting.meetingLoc : 'TBA';
-            var meeting_time = time.formatMeetingTime(meeting.meetingTime);
+            var meeting_time = moment(meeting.meetingTime, 'h:mm A', true)
+            meeting_time = meeting_time.isValid() ? time.formatTime(meeting_time, true) : undefined;
             var meeting_date = time.formatMeetingDate(meeting.meetingDay) || meeting.meetingDay;
             var fulltime = (meeting_date && meeting_time) ?
                            (meeting_date + ', ' + meeting_time) : 'TBA';

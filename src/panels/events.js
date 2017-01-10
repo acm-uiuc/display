@@ -22,7 +22,6 @@ var EventsPanel = React.createClass({
     updateEvents: function() {  
         $.get(eventsURL, function(data) {
             var now = moment();
-            console.log(data)
             var events = data
                 .map(function(e) {
                     var start = moment(e.start_time);
@@ -43,7 +42,6 @@ var EventsPanel = React.createClass({
                     return a.startDate.isAfter(b.startDate);
                 })
                 .slice(0, 5);
-            console.log(events)
             this.setState({events: events});
         }.bind(this));
     },
@@ -58,14 +56,13 @@ var EventsPanel = React.createClass({
         if (showDate) {
             dateComponents.push(date.format('MMM D'));
         }
-        dateComponents.push(date.format('h:mm A'));
+        dateComponents.push(time.formatTime(date));
         return dateComponents.join(' ');
     },
 
     formatEventTime: function(event) {
         var startDateStr = this.formatDate(event.startDate, false, true);
         var isSameDay = event.startDate.isSame(event.endDate, 'day');
-        console.log(isSameDay)
         var endDateStr = this.formatDate(event.endDate, true, !isSameDay);
         return startDateStr +  ' \u2013 ' + endDateStr;
     },
