@@ -23,7 +23,12 @@ var MeetingTimesPanel = React.createClass({
     },
 
     updateMeetingTimes: function() {
-        $.getJSON(groupsURL, function(data) {
+        $.getJSON({
+            url: groupsURL,
+            headers: {
+                'Authorization': secrets.grootAccessToken
+            }
+        }, function(data) {
             this.setState({sigs: data});
         }.bind(this));
     },

@@ -20,7 +20,12 @@ var EventsPanel = React.createClass({
     },
 
     updateEvents: function() {  
-        $.get(eventsURL, function(data) {
+        $.get({
+            url: eventsURL,
+            headers: {
+                'Authorization': secrets.grootAccessToken
+            }
+        }, function(data) {
             var now = moment();
             var events = data
                 .map(function(e) {
