@@ -31,7 +31,7 @@ var ACMDisplay = React.createClass({
         var panelDivs = panels.filter(function(panel) {
             return usedPanelIds.includes(panel.name);
         }).map(function(panel) {
-            return <div key={panel.name}>{React.createElement(panel.component, null)}</div>
+            return <div key={panel.name}>{React.createElement(panel.component)}</div>
         });
         return <div>
             <Header />
