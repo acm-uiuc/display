@@ -6,7 +6,7 @@ var secrets = require('../secrets.js');
 
 var time = require('../utils/time');
 
-var eventsURL = secrets.grootServicesURL + '/events';
+var eventsURL = secrets.grootServicesURL + '/events/upcoming';
 var EVENTS_INTERVAL_MS = 60 * 1000;
 
 /**
@@ -20,7 +20,7 @@ var EventsPanel = React.createClass({
     },
 
     updateEvents: function() {  
-        $.get({
+        $.getJSON({
             url: eventsURL,
             headers: {
                 'Authorization': secrets.grootAccessToken
