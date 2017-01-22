@@ -6,3 +6,11 @@
     }
     margin: 0 auto;
 }
+
+.memes-error-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5em;
+    color: $font-color-alt;
+}

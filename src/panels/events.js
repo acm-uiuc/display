@@ -15,7 +15,8 @@ var EVENTS_INTERVAL_MS = 60 * 1000;
 var EventsPanel = React.createClass({
     getInitialState: function() {
         return {
-            events: []
+            events: [],
+            error: null
         };
     },
 
@@ -47,7 +48,13 @@ var EventsPanel = React.createClass({
                     return a.startDate.isAfter(b.startDate);
                 })
                 .slice(0, 5);
-            this.setState({events: events});
+            this.setState({
+                events: events,
+                error: null
+            });
+        }.bind(this))
+        .fail(function(error){
+            this.setState({error: error.statusText});
         }.bind(this));
     },
 
@@ -88,18 +95,29 @@ var EventsPanel = React.createClass({
     },
 
     render: function() {
+        var body = null;
+        var error = this.state.error;
         var bodyClass = classNames({
             'panel-body': true,
             'events-body-no-events': this.state.events.length == 0
         });
 
+        if(error) {
+            body = <div className="panel-body events-error-body">
+                <p>Error fetching events.</p>
+            </div>;
+        }
+        else {
+            body = <div className={bodyClass}>
+                {this.getEvents()}
+            </div>;
+        }
+
         return <div className="panel">
             <div className="panel-heading">
                 <h2>Events</h2>
             </div>
-            <div className={bodyClass}>
-                {this.getEvents()}
-            </div>
+            {body}
         </div>;
     }
 });

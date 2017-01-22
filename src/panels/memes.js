@@ -11,7 +11,8 @@ var MEMES_INTERVAL_MS = 10 * 1000;
 var MemesPanel = React.createClass({
     getInitialState: function() {
         return {
-            memeUrl: ""
+            memeUrl: "",
+            memeError: null
         };
     },
 
@@ -22,8 +23,13 @@ var MemesPanel = React.createClass({
                 'Authorization': secrets.grootAccessToken
             }
         }, function(data) {
-            this.setState({memeUrl: data.url});
-            console.log(data);
+            this.setState({
+                memeUrl: data.url,
+                memeError: null
+            });
+        }.bind(this))
+        .fail(function(error) {
+            this.setState({memeError: error});
         }.bind(this));
     },
 
@@ -32,14 +38,30 @@ var MemesPanel = React.createClass({
         setInterval(this.nextMeme, MEMES_INTERVAL_MS);
     },
 
+    imageError: function() {
+        this.setState({memeError: true});
+    },
+
     render: function() {
+        var error = this.state.memeError;
+        var body = null;
+
+        if(error){
+            body = <div className="panel-body memes-error-body">
+                <p>🔥🤷🔥</p>
+            </div>;
+        }
+        else {
+            body = <div className="panel-body memes-body">
+                <img src={this.state.memeUrl} onError={this.imageError} />
+            </div>;
+        }
+
         return <div className="panel panel-fill">
             <div className="panel-heading">
                 <h2>Memes</h2>
             </div>
-            <div className="panel-body memes-body">
-                <img src={this.state.memeUrl} />
-            </div>
+            {body}
         </div>;
     }
 });
