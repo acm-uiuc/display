@@ -1,7 +1,3 @@
-.meeting-times-panel {
-    width: 500px;
-}
-
 .meeting-times-body {
     display: flex;
     flex-direction: column;
@@ -14,7 +10,7 @@ table {
 }
 
 td, th {
-    border: 1px solid #ccc;
+    border: 1px solid $border-color;
     padding: 0.625rem;
     text-align: left;
     width: calc(100% / 3);
@@ -28,11 +24,19 @@ td, th {
         width: 12px;
         height: 12px;
         border-radius: 6px;
-        background-color: #ddd;
+        background-color: $button-inactive-color;
         margin: 8px 6px;
 
         &.active {
-            background-color:#999;
+            background-color: $button-active-color;
         }
     }
+}
+
+.meeting-times-error-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    color: $font-color-alt;
 }

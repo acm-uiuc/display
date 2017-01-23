@@ -1,17 +1,22 @@
+@import 'base';
 @import 'header';
 @import 'loading';
 @import 'panels/ads';
 @import 'panels/beats';
 @import 'panels/events';
 @import 'panels/meeting-times';
+@import 'panels/memes';
 @import 'panels/mtd';
 @import 'panels/sponsors';
 @import 'panels/sujay';
 @import 'panels/weather';
+@import url('../node_modules/react-grid-layout/css/styles.css');
+
 
 body {
+    color: $font-color;
     margin: 0px;
-    font-family: sans-serif;
+    @include monospace-font();
 }
 
 #main {
@@ -38,30 +43,44 @@ body {
 }
 
 .panel {
-    margin-left: 25px;
-    border: 1px solid #385461;
+    border: 1px solid $border-color;
     display: flex;
     flex-direction: column;
+    width: inherit;
+    height: inherit;
 
     .panel-heading {
         padding: 10px;
-        background: linear-gradient(#2f86ae, #385461);
-        color: white;
+        border-bottom: 1.5px solid $border-color;
+        color: $font-color-neg;
+        background-color: $font-color-neg-back;
         flex-shrink: 0;
 
         h2 {
             margin-top: 0;
             margin-bottom: 0;
             font-size: 1.25em;
+            font-weight: 400;
         }
     }
 
     .panel-body {
         padding: 10px;
         flex-grow: 1;
+        @include serif-font;
     }
 }
 
 .panel-fill {
     flex-grow: 1;
+}
+
+// Make images not draggable
+img {
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }

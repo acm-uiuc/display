@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto+Mono:400,700');
+
+$font-color: #333333;
+$font-color-alt: #999;
+$font-color-neg: white;
+$font-color-neg-back: #333333;
+$border-color: #464646;
+$button-active-color: #999;
+$button-inactive-color: #ddd;
+
+@mixin monospace-font() {
+    font-family: 'Roboto Mono', monospace;
+}
+
+@mixin serif-font() {
+    font-family: 'Open Sans', sans-serif;
+}

@@ -1,13 +1,15 @@
-.events-panel {
-    width: 356px;
-}
-
 .event-item {
     margin: 10px 5px;
     line-height: 1.5em;
 
     .event-summary {
         font-size: 1.25em;
+    }
+
+    .event-location {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
@@ -16,5 +18,13 @@
     justify-content: center;
     align-items: center;
     font-size: 1.5em;
-    color: #999;
+    color: $font-color-alt;
+}
+
+.events-error-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    color: $font-color-alt;
 }

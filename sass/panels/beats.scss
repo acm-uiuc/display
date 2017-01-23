@@ -1,7 +1,3 @@
-.beats-panel {
-    width: 500px;
-}
-
 .beats-panel-body {
     display: flex;
     align-items: center;
@@ -32,5 +28,5 @@
     justify-content: center;
     align-items: center;
     font-size: 1.1em;
-    color: #999;
+    color: $font-color-alt;
 }

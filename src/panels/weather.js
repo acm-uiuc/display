@@ -5,7 +5,7 @@ var secrets = require('../secrets');
 
 // Animated weather icons
 var Skycons = require('../third_party/skycons.js').Skycons;
-var skycons = new Skycons({color: 'white'});
+var skycons = new Skycons({color: '#333333'});
 skycons.play();
 
 // Weather refresh rate, in milliseconds

@@ -3,8 +3,8 @@
 .header-container {
     width: 1920px;
     height: 200px;
-    background: linear-gradient(#2f86ae, #385461);
-    color: white;
+    color: $font-color;
+    border-bottom: 1.5px solid $border-color;
     display: flex;
     justify-content: space-between;
 }

@@ -4,7 +4,7 @@
 
 .bus-item {
     font-size: 1.5em;
-    line-height: 1.7em;
+    line-height: 1.6em;
 
     .bus-name {
         display: inline;
@@ -21,5 +21,5 @@
     justify-content: center;
     align-items: center;
     font-size: 1.5em;
-    color: #999;
+    color: $font-color-alt;
 }

@@ -101,7 +101,7 @@ var BeatsPanel = React.createClass({
             </div>;
         }
 
-        return <div className="panel beats-panel">
+        return <div className="panel">
             <div className="panel-heading">
                 <h2>Beats by ACM - Now Playing</h2>
             </div>
