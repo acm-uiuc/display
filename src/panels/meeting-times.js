@@ -62,7 +62,7 @@ var MeetingTimesPanel = React.createClass({
     componentDidMount: function() {
         this.updateMeetingTimes();
         setInterval(this.updateMeetingTimes, REFRESH_TIMES_MS);
-        setInterval(this.nextPage, SWITCH_PAGE_MS / 10);
+        setInterval(this.nextPage, SWITCH_PAGE_MS);
     },
 
     render: function() {
