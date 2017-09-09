@@ -16,6 +16,14 @@ td, th {
     width: calc(100% / 3);
 }
 
+td.small {
+  font-size: .8em;
+}
+
+td.xsmall {
+  font-size: .75em;
+}
+
 .dot-container {
     text-align: center;
 
