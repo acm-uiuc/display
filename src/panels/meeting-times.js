@@ -93,11 +93,6 @@ var MeetingTimesPanel = React.createClass({
                     </tr>;
                 }
                 else {
-                    var location = meeting.meetingLoc ? meeting.meetingLoc : 'TBA';
-                    var meeting_time = moment(meeting.meetingTime, 'h:mm A', true);
-                    meeting_time = meeting_time.isValid() ? time.formatTime(meeting_time, true) : undefined;
-                    var meeting_date = time.formatMeetingDate(meeting.meetingDay) || meeting.meetingDay;
-
                     var chairs = meeting.chairs.replace(' and ', ',').split(',');
                     var chair_name = 'N/A';
                     if (chairs.length > 0) {
