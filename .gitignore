@@ -45,3 +45,6 @@ src/secrets.js
 # Vim swap file
 .*.swp
 current_layout.json
+
+# Miscellaneous
+.DS_Store
