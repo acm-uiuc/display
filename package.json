@@ -24,7 +24,7 @@
         "gulp-import-css": "0.1.x",
         "gulp-sass": "2.3.x",
         "ical.js": "1.2.x",
-        "jquery": "2.2.x",
+        "jquery": "3.0.x",
         "moment": "2.12.x",
         "react": "0.14.x",
         "react-dom": "0.14.x",
