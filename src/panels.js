@@ -4,7 +4,6 @@ var MTDPanel = require('./panels/mtd');
 var MeetingTimesPanel = require('./panels/meeting-times');
 var SponsorsPanel = require('./panels/sponsors');
 var EventsPanel = require('./panels/events');
-var MemesPanel = require('./panels/memes');
 
 
 module.exports = [

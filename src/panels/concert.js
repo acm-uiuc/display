@@ -55,12 +55,12 @@ var ConcertPanel = React.createClass({
     getArtUrl: function() {
         var nowPlaying = this.state.nowPlaying;
         if (!nowPlaying) {
-            return baseUrl + 'static/default-album-art.jpg';
+            return baseUrl + 'static/images/default-thumbnail.jpg';
         }
 
         var artUri = nowPlaying.thumbnail;
         if (this.state.artError || !artUri) {
-            return baseUrl + 'static/default-album-art.jpg';
+            return baseUrl + 'static/images/default-thumbnail.jpg';
         } else if (/https?:\/\//.test(artUri)) {
             return artUri;
         } else {
@@ -82,6 +82,7 @@ var ConcertPanel = React.createClass({
                 <p>Error fetching Now Playing from Concert: {error}</p>
             </div>;
         } else if (nowPlaying) {
+            console.log(nowPlaying);
             var elapsed = nowPlaying.current_time / 1000;
             var elapsedStr = this.getTimeString(elapsed);
             var duration = nowPlaying.duration / 1000;
