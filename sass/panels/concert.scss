@@ -1,4 +1,4 @@
-.beats-panel-body {
+.concert-panel-body {
     display: flex;
     align-items: center;
 
@@ -8,12 +8,12 @@
         flex-shrink: 0;
     }
 
-    .beats-text {
+    .concert-text {
         margin-left: 15px;
         font-size: 1.15em;
     }
 
-    .beats-title {
+    .concert-title {
         font-size: 1.25em;
     }
 
@@ -23,7 +23,7 @@
     }
 }
 
-.beats-error-body {
+.concert-error-body {
     display: flex;
     justify-content: center;
     align-items: center;

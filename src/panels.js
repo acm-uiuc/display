@@ -1,5 +1,5 @@
 var AdsPanel = require('./panels/ads');
-var BeatsPanel = require('./panels/beats');
+var ConcertPanel = require('./panels/concert');
 var MTDPanel = require('./panels/mtd');
 var MeetingTimesPanel = require('./panels/meeting-times');
 var SponsorsPanel = require('./panels/sponsors');
@@ -17,10 +17,6 @@ module.exports = [
         component: MeetingTimesPanel
     },
     {
-        name: 'beats',
-        component: BeatsPanel
-    },
-    {
         name: 'events',
         component: EventsPanel
     },
@@ -33,7 +29,7 @@ module.exports = [
         component: SponsorsPanel
     },
     {
-        name: 'memes',
-        component: MemesPanel
+        name: 'concert',
+        component: ConcertPanel
     }
 ];
