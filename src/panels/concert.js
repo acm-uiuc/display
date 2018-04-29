@@ -86,6 +86,7 @@ var ConcertPanel = React.createClass({
             var elapsedStr = this.getTimeString(elapsed);
             var duration = nowPlaying.duration / 1000;
             var durationStr = this.getTimeString(duration);
+            var playedby = nowPlaying.playedby;
 
             body = <div className="panel-body concert-panel-body">
                 <img src={this.getArtUrl()} onError={this.handleError} />
@@ -94,7 +95,7 @@ var ConcertPanel = React.createClass({
                         {nowPlaying.current_track}
                     </div>
                     <p>{elapsedStr} / {durationStr}</p>
-                    <p>concert.acm.illinois.edu</p>
+                    <p>{playedby}</p>
                 </div>
             </div>;
         }
