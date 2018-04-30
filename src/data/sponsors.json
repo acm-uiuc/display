@@ -1,57 +1,47 @@
 [
     {
-        "name": "Palantir",
-        "level": "Diamond",
-        "logoPath": "img/sponsors/palantir.png"
+        "name": "Uber",
+        "level": "Silver",
+        "logoPath": "img/sponsors/uber.png"
     },
     {
-        "name": "Wish",
+        "name": "Citadel",
         "level": "Diamond",
-        "logoPath": "img/sponsors/wish.png"
+        "logoPath": "img/sponsors/citadel.png"
     },
     {
-        "name": "Capital One",
-        "level": "Diamond",
-        "logoPath": "img/sponsors/capital-one.png"
+        "name": "Goldman Sachs",
+        "level": "Gold",
+        "logoPath": "img/sponsors/goldman.png"
+    },
+    {
+        "name": "HRT",
+        "level": "Silver",
+        "logoPath": "img/sponsors/hrt.png"
     },
     {
         "name": "Sunrise Futures",
         "level": "Gold",
-        "logoPath": "img/sponsors/sunrise-futures.jpg"
+        "logoPath": "img/sponsors/sunrise.png"
     },
     {
-        "name": "Fitbit",
+        "name": "Optiver",
         "level": "Gold",
-        "logoPath": "img/sponsors/fitbit.png"
-    },
-    {
-        "name": "Akuna Capital",
-        "level": "Gold",
-        "logoPath": "img/sponsors/akuna-capital.png"
-    },
-    {
-        "name": "Amazon",
-        "level": "Gold",
-        "logoPath": "img/sponsors/amazon.png"
-    },
-    {
-        "name": "Qualtrics",
-        "level": "Silver",
-        "logoPath": "img/sponsors/qualtrics.png"
-    },
-    {
-        "name": "Google",
-        "level": "Silver",
-        "logoPath": "img/sponsors/google.png"
-    },
-    {
-        "name": "Allston Trading",
-        "level": "Silver",
-        "logoPath": "img/sponsors/allston-trading.png"
+        "logoPath": "img/sponsors/optiver.png"
     },
     {
         "name": "3Red",
         "level": "Silver",
-        "logoPath": "img/sponsors/3red.jpg"
+        "logoPath": "img/sponsors/3red.png"
+    },
+    {
+        "name": "Allston Trading",
+        "level": "Bronze",
+        "logoPath": "img/sponsors/allston.png"
+    },
+    {
+        "name": "Palantir",
+        "level": "Silver",
+        "logoPath": "img/sponsors/palantir.png"
     }
 ]
