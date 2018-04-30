@@ -1,7 +1,7 @@
 var React = require('react');
 var $ = require('jquery');
 
-var baseUrl = 'http://localhost:5000/';
+var baseUrl = 'https://concert.acm.illinois.edu/';
 var nowPlayingUrl = baseUrl + 'state';
 
 /**
