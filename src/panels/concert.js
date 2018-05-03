@@ -23,7 +23,7 @@ var ConcertPanel = React.createClass({
         })
         .done(function(data) {
             this.setState({
-                nowPlaying: JSON.parse(data),
+                nowPlaying: data,
                 error: null
             });
         }.bind(this))
