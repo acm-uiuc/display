@@ -20,6 +20,7 @@ var MeetingTimesPanel = React.createClass({
         return {
             index: 0,
             groups: [],
+            displayingMeetings: true,
             error: null
         };
     },
@@ -49,9 +50,13 @@ var MeetingTimesPanel = React.createClass({
     },
 
     nextPage: function() {
-        var newIndex = this.state.index + ROWS_PER_PAGE;
-        newIndex = newIndex >= this.state.groups.length ? 0 : newIndex;
-        this.setState({index: newIndex});
+        var newIndex = this.state.index;
+        var displayingMeetings = !this.state.displayingMeetings;
+        if (displayingMeetings) {
+            newIndex = newIndex + ROWS_PER_PAGE;
+            newIndex = newIndex >= this.state.groups.length ? 0 : newIndex;
+        }
+        this.setState({index: newIndex, displayingMeetings: displayingMeetings});
     },
 
     componentDidMount: function() {
@@ -62,6 +67,7 @@ var MeetingTimesPanel = React.createClass({
 
     render: function() {
         var index = this.state.index;
+        var displayingMeetings = this.state.displayingMeetings;
         var error = this.state.error;
         var body = null;
         if(error){
@@ -72,45 +78,106 @@ var MeetingTimesPanel = React.createClass({
         else {
             var pageTimes = this.state.groups.slice(index, index + ROWS_PER_PAGE);
             var items = pageTimes.map(function(meeting) {
-                var location = meeting.meetingLoc ? meeting.meetingLoc : 'TBA';
-                var meeting_time = moment(meeting.meetingTime, 'h:mm A', true);
-                meeting_time = meeting_time.isValid() ? time.formatTime(meeting_time, true) : undefined;
-                var meeting_date = time.formatMeetingDate(meeting.meetingDay) || meeting.meetingDay;
-                var fulltime = (meeting_date && meeting_time) ?
-                               (meeting_date + ', ' + meeting_time) : 'TBA';
-                return <tr key={meeting.name}>
-                    <td>{meeting.name}</td>
-                    <td>{location}</td>
-                    <td>{fulltime}</td>
-                </tr>;
+                if (displayingMeetings) {
+                    var location = meeting.meetingLoc ? meeting.meetingLoc : 'TBA';
+                    var meeting_time = moment(meeting.meetingTime, 'h:mm A', true);
+                    meeting_time = meeting_time.isValid() ? time.formatTime(meeting_time, true) : undefined;
+                    var meeting_date = time.formatMeetingDate(meeting.meetingDay) || meeting.meetingDay;
+
+                    var fulltime = (meeting_date && meeting_time) ?
+                                   (meeting_date + ', ' + meeting_time) : 'TBA';
+                    return <tr key={meeting.name}>
+                        <td>{meeting.name}</td>
+                        <td>{location}</td>
+                        <td>{fulltime}</td>
+                    </tr>;
+                }
+                else {
+                    var chairs = meeting.chairs.replace(' and ', ',').split(',');
+                    var chair_name = 'N/A';
+                    if (chairs.length > 0) {
+                        var name_split = $.trim(chairs[0]);
+                        chair_name = name_split;
+                    }
+
+                    var chair_contacts = meeting.chairContact.split(',');
+                    var display_contact = 'N/A';
+                    if (chairs.length > 0) {
+                        display_contact = chair_contacts[0];
+                    }
+
+                    var name_class = '';
+                    if (chair_name.length > 17) {
+                        name_class = 'xsmall';
+                    }
+                    else if (chair_name.length > 14) {
+                        name_class = 'small';
+                    }
+
+                    var fulltime = (meeting_date && meeting_time) ?
+                                   (meeting_date + ', ' + meeting_time) : 'TBA';
+                    return <tr key={meeting.name}>
+                        <td>{meeting.name}</td>
+                        <td className={name_class}>{chair_name}</td>
+                        <td>{display_contact}</td>
+                    </tr>;
+                }
+
             });
 
             var dots = [];
             for (var i = 0; i < this.state.groups.length; i += ROWS_PER_PAGE) {
                 var dotClass = classNames({
                     dot: true,
-                    active: i == index
+                    active: displayingMeetings && i == index
                 });
                 dots.push(<span key={i} className={dotClass} />);
+
+                var dotClass2 = classNames({
+                    dot: true,
+                    active: !displayingMeetings && i == index
+                });
+                dots.push(<span key={i + 1} className={dotClass2} />);
             }
 
-            body = <div className="panel-body meeting-times-body">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Location</th>
-                            <th>Time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {items}
-                    </tbody>
-                </table>
-                <div className="dot-container">
-                    {dots}
-                </div>
-            </div>;
+            if (displayingMeetings) {
+                body = <div className="panel-body meeting-times-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {items}
+                        </tbody>
+                    </table>
+                    <div className="dot-container">
+                        {dots}
+                    </div>
+                </div>;
+            }
+            else {
+                body = <div className="panel-body meeting-times-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Chair</th>
+                                <th>Contact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {items}
+                        </tbody>
+                    </table>
+                    <div className="dot-container">
+                        {dots}
+                    </div>
+                </div>;
+            }
         }
         return <div className="panel">
             <div className="panel-heading">
